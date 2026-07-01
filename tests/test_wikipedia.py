@@ -15,3 +15,7 @@ def test_clicking_link_navigates_to_article(page):
     page.goto('https://en.wikipedia.org/wiki/Albert_Einstein')
     page.locator("a[title='Theoretical physicist']").click()
     expect(page.locator('#firstHeading')).to_contain_text('Theoretical physics')
+
+def test_article_has_expected_section(page):
+    page.goto('https://en.wikipedia.org/wiki/Albert_Einstein')
+    expect(page.locator('#Life_and_career')).to_be_visible()
