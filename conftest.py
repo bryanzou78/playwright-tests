@@ -13,3 +13,12 @@ def page_on_wiki_homepage(page):
 def page_on_einstein_article(page):
     page.goto('https://en.wikipedia.org/wiki/Albert_Einstein')
     yield page
+
+@pytest.fixture
+def search(page_on_wiki_homepage):
+    def run(term):
+        page_on_wiki_homepage.locator('input#searchInput').click()
+        page_on_wiki_homepage.locator('input#searchInput').fill(term)
+        page_on_wiki_homepage.keyboard.press('Enter') 
+    yield run
+        
